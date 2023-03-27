@@ -264,10 +264,12 @@ extension UIWindow {
         }
     }
     
-    
-    open override var canBecomeFirstResponder: Bool {
-        return true
-    }
+// UIWindow 覆写 canBecomeFirstResponder 属性的返回值为 true 时,会使 UIWindow 的对象成为第一响应者.
+// 给 UIControl 对象绑定事件时,调用 addTarget(_:action:) 方法.在未指定 target 时,该方法会沿着响应者链寻找合适的事件响应者.此时 UIWindow 的对象就会成为此处的事件响应者.
+// 导致原本绑定的 @objc func clickAction() {} 方法未被执行.
+//    open override var canBecomeFirstResponder: Bool {
+//        return true
+//    }
     
     open override func motionBegan(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         super.motionBegan(motion, with: event)
